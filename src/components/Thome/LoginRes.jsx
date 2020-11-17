@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LoginResWrap } from './StyledThomeNav'
-import { Link } from 'react-router-dom'
+import NotLogin from './NotLogin'
+import ComLogin from './ComLogin'
 
 function LoginRes(props) {
+  const [loginType, setLoginType] = useState('')
+  useEffect(() => {
+    setLoginType(localStorage.getItem("username"))
+
+  }, [])
   return (
     <LoginResWrap>
-      <li>
-        <Link to="/reglogin/login">登录</Link>
-      </li>
-      <li>
-        <Link to="/reglogin/login">注册</Link>
-      </li>
+      {
+        loginType ? <ComLogin></ComLogin> : <NotLogin></NotLogin>
+      }
     </LoginResWrap>
   );
 }

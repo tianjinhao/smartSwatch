@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from '../carousel/Carousel.jsx'
 import {ShopHead} from './shop.js'
-import TotalBan from '../ui//TotalBan.jsx'
+import TotalBan from '../ui/TotalBan.jsx'
 
 
 function ShopContainer(props) {

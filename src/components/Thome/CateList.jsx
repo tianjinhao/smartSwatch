@@ -1,29 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CateListWrap } from "./StyledThomeNav";
 import CateItem from './CateItem'
 
-import sport1 from "@a/images/home/hot/运动周边/热卖-运动周边-1.png";
-// import sport2 from "@a/images/home/hot/运动周边/热卖-运动周边-2.png";
-// import sport3 from "@a/images/home/hot/运动周边/热卖-运动周边-3.png";
-// import sport4 from "@a/images/home/hot/运动周边/热卖-运动周边-4.png";
-// import sport5 from "@a/images/home/hot/运动周边/热卖-运动周边-5.png";
-// import sport6 from "@a/images/home/hot/运动周边/热卖-运动周边-6.png";
-// import sport7 from "@a/images/home/hot/运动周边/热卖-运动周边-7.png";
+import sportImg from "@a/images/home/hot/运动周边/热卖-运动周边-1.png";
+import watchImg from "@a/images/home/hot/手表/热卖-手表-1.png";
+import wristImg from "@a/images/home/hot/手环/热卖-手环-1.png";
 
 function CateList(props) {
+  const [showImg, setShowImg] = useState(sportImg)
+  useEffect(() => {
+    switch(props.type) {
+      case "watch" :
+        return setShowImg(watchImg)
+      case "wrist" :
+        return setShowImg(wristImg)
+      case "sports" :
+        return setShowImg(sportImg)
+      default: 
+        return
+    }
+  }, [props.type])
+  // console.log(props);
   return (
     <CateListWrap>
       <div className="cate-list">
         <ul>
           <li>
-            <img src={sport1} alt="" />
+            <img src={showImg} alt="" />
           </li>
-          <CateItem></CateItem>
-          <CateItem></CateItem>
-          <CateItem></CateItem>
-          <CateItem></CateItem>
-          <CateItem></CateItem>
-          <CateItem></CateItem>
+
+          {
+            props.hotSaleData.map((item) => {
+              return <CateItem 
+                        key={item.commodityId}
+                        value={item}
+                      ></CateItem>
+            })
+          }
+
+          
           
         </ul>
       </div>

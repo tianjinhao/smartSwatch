@@ -1,16 +1,17 @@
 import styled from 'styled-components'
 
 import img from '@a/images/bottom/shop.png'
-
+import img1 from './a.png'
 const ProductClassify = styled.div`
   display:flex;
   .product{
     margin-right:5px;
     text-align:center;
-    height:49px;
-    padding:0 20px 0 25px;
+    height:52px;
+    width: 95px;
     display:flex;
     align-items:center;
+    justify-content:center;
     position: relative;
     p{
       font-size: 16px;
@@ -37,7 +38,6 @@ const ProductClassify = styled.div`
           background:#fff;
           top:52px;
           z-index:999;
-          width:250px;
           li{
             display:flex;
             height:50px;
@@ -51,23 +51,28 @@ const ProductClassify = styled.div`
             input{
               margin-left:31px;
             }
-            label{
+            h5{
               margin-left:18px;
+              font-size: 14px;
+              font-family: SourceHanSansCN;
+              font-weight: 300;
+              color: #787878;
+              line-height: 11px;
             }
           }
         }
       }
-  
-      
     }
  
   .product:hover{
-    background:url(${img}) no-repeat -128px -135px;
-    width: 95px;
-	  height: 52px;
+    background: linear-gradient(139deg, #4742FC, #26BBFF, #26BBFF);
     P{
-      display:none;
+      color: #F1F1F1;
+      p{
+      background:url(${img1}) no-repeat;
     }
+    }
+
     div{
         display:block;
       }

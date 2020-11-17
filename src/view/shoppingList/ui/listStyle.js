@@ -37,7 +37,7 @@ const TwoEl = styled.div`
   span{
     font-size:16px;
     margin-left:50px;
-    color:#626262;
+    color:#64AEFF;
     margin-right:27px;
   }
 `
@@ -47,6 +47,9 @@ const ThreeEl = styled.div`
   align-items:center;
   position: relative;
   z-index:16;
+  .showStyle{
+    color:#64AEFF;
+  }
   .classify{
     font-size:16px;
     color:#595959;
@@ -54,28 +57,36 @@ const ThreeEl = styled.div`
   }
   span{
     font-size:16px;
-    margin-left:46px;
-    color:#626262;
-    margin-right:27px;
+    margin-left:50px;
+    
+    /* margin-right:27px; */
     display:flex;
     align-items:center;
-    h2{
-      width:14px;
-      border: 1px solid #E8E8E8;
-      line-height:18px;
-      height:20px;
-      border-right:0;
-      font-size: 13px;
-      font-family: SourceHanSansCN;
-      font-weight: 400;
-      color: #595959;
-    }
-    input{
-      width: 32px;
-      height: 20px;
-      border: 1px solid #E8E8E8;
-      border-left:0;
-    }
+    form{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      h2{
+        width:14px;
+        border: 1px solid #E8E8E8;
+        line-height:18px;
+        height:20px;
+        border-right:0;
+        font-size: 13px;
+        font-family: SourceHanSansCN;
+        font-weight: 400;
+        color: #595959;
+      }
+      input{
+        width: 32px;
+        height: 20px;
+        border: 1px solid #E8E8E8;
+        border-left:0;
+      }
+      /* input:last-child{
+        display:none;
+      } */
+  }
   }
   span:last-child{
       margin-left:600px;
@@ -101,9 +112,14 @@ const List = styled.div`
     display:flex;
     flex-wrap:wrap;
     justify-content: space-between;
+    &::after{
+      content:'';
+      width:47%;
+      border:1px solid transparent;
+    }
     li{
       width: 275px;
-      height: 377px;
+      height: 400px;
       background: #FFFFFF;
       border-radius: 9px 9px 9px 9px;
       border:7px solid #F7F7F7;
@@ -111,31 +127,48 @@ const List = styled.div`
       flex-direction:column;
       align-items:center;
       margin-bottom:64px;
-      img{
-        margin:31px 80px 41px 79px;
-      }
-      h1{
-        font-size: 16px;
+      .v-contain{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        .img-con{
+          width:182px;
+          height:182px;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          margin:31px 80px 41px 79px;
+          img{
+            
+          }
+        }
+        h1{
+          font-size: 16px;
+          font-family: SourceHanSansCN;
+          font-weight: bold;
+          color: #4F4F4F;
+          line-height: 16px;
+        }
+        .describe{
+          display:flex;
+          h2{
+          font-size: 12px;
+          font-family: SourceHanSansCN;
+          font-weight: bold;
+          color: #BFBFBF;
+          line-height: 16px;
+          margin-top:5px;
+        }
+        }
+
+        h3{  
+        font-size: 18px;
         font-family: SourceHanSansCN;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #FB1429;
         line-height: 16px;
-      }
-      h2{
-        font-size: 12px;
-        font-family: SourceHanSansCN;
-        font-weight: bold;
-        color: #BFBFBF;
-        line-height: 16px;
-        margin-top:5px;
-      }
-      h3{  
-      font-size: 18px;
-      font-family: SourceHanSansCN;
-      font-weight: bold;
-      color: #FB1429;
-      line-height: 16px;
-      margin-top:15px;
+        margin-top:15px;
+        }
       }
       p{
         width: 132px;
@@ -146,16 +179,20 @@ const List = styled.div`
       }
     }
     li:hover{
-      border:7px solid #C5E1FF;
+        border:7px solid #C5E1FF;
     }
   }
 `
-
+const ListEmpty = styled.div`
+  margin:0 auto;
+  width:100%;
+`
 export {
   ListMain,
   ShopContain,
   FirstEl,
   TwoEl,
   ThreeEl,
-  List
+  List,
+  ListEmpty
 }

@@ -1,23 +1,40 @@
-import React,{useState,useCallback} from 'react';
+import React,{useState,useCallback, useEffect} from 'react';
 import { Input, Pagination } from 'antd';
 import 'antd/dist/antd.css';
 import {FavoritesWarp} from './styledCart'
+import {favAsync,cateAsync} from '../actionCreator'
+import {useSelector,useDispatch} from 'react-redux'
 
 
-import testimg from '@a/images/3_03.jpg'
 
 const {Search} = Input
 function CartBodyFavorites(props) {
+  const dispatch = useDispatch()
+  const lodata = useCallback(()=>{
+    dispatch(favAsync())
+  },[dispatch])
+  const catedata = useCallback(()=>{
+    dispatch(cateAsync())
+  },[dispatch])
+  useEffect(()=>{
+    lodata()
+    catedata()
+  },[lodata,catedata])
+
+
+  const favlist = useSelector(state=>state.shoppingCart.favList.data)
+  const catelist = useSelector(state=>state.shoppingCart.cate.data)
+  const total = useSelector((state=>state.shoppingCart.favList.total))
+  console.log(favlist);
+  console.log(catelist);
   const [show,setShow] = useState(true)
   const [liShow,setLiShow] = useState(true)
 
   const handler =useCallback(() =>{
     console.log('12312312')
   },[])
-  const listChange = useCallback((x,y) => {
-    console.log(x)
-  },[])
 
+  
   return (
     <FavoritesWarp>
       <div className='favoritesHeader'>
@@ -54,25 +71,36 @@ function CartBodyFavorites(props) {
         </div>
       </div>
       <div className='fav-body'>
-        <div className="favB-header">
-          <span>全部商品(50)</span>
-          <span>手表(10)</span>
-          <span>手环(10)</span>
-          <span>运动周边(10)</span>
-          <span>配件(10)</span>
+        <div className="favB-header" >
+          <span>全部商品({total})</span>
+          {
+            catelist && catelist.map((v)=>(
+              <span key={v.productId}>{v.productName}({v.productNum})</span>
+            ))
+          }
+
         </div>
         <ul className='fav-list'>
-          <li className={!liShow?'list-items lis-items-checked': 'list-items'} onClick={()=>setLiShow(!liShow)}>
-            <div className='li-chBox1' style={{display:(liShow?'none':'')}}></div>
-            <div className='li-chBox2'></div>
-            <img src={testimg} alt=""/>
-            <span className='fav-name'>智能手表</span>
-            <span className='fav-price'>
-              <span>￥</span>1099
-            </span>
-          </li>
+          {
+            favlist && favlist.map((v)=>(
+              <li 
+              className={!liShow?'list-items lis-items-checked': 'list-items'} 
+              onClick={()=>setLiShow(!liShow)}
+              key={v.commodityId}
+              >
+                <div className='li-chBox1' style={{display:(liShow?'none':'')}}></div>
+                <div className='li-chBox2'></div>
+                <div className='favimg'><img src={v.imageUrl} alt=""/></div>
+                <span className='fav-name'>{v.commodityName}</span>
+                <span className='fav-price'>
+                  <span>￥</span>{v.commodityPrice}
+                </span>
+              </li>
+            ))
+          }
+          
         </ul>
-        <Pagination defaultCurrent={1} total={50} pageSizeOptions={10} onChange={listChange}/>
+        <Pagination defaultCurrent={1} total={total} pageSizeOptions={10} onChange={()=>dispatch(lodata())}/>
       </div>
     </FavoritesWarp>
   );

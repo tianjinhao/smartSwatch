@@ -2,15 +2,14 @@ import styled from 'styled-components'
 
 const StyledReg = styled.div`
   background: #FCFEFE;
-  box-shadow: 0px 4px 7px 0px rgba(85, 85, 85, 0.3);
-  z-index: 1;
+  box-shadow: 0px 4px 7px 0px rgba(85, 85, 85, 0.6);
   position:absolute;
-  right: 310px;
-  top: 198px;
-
-  width: 370px;
-  height: 380px;
+  right: 280px;
+  top: 150px;
+  width: 400px;
+  height: 410px;
   h1{ 
+    margin :10px 0 20px 0;
     padding: 14px 64px;
     width: 242px;
     height: 24px;
@@ -28,30 +27,39 @@ const StyledReg = styled.div`
     margin-left: 6px;
   }
   a{
-    text-decoration:none
-  }
-  input:focus{   
-    border:none;
-    font-size: 12px;
+    text-decoration:none;
+    box-sizing: content-box;
+    color:#333;
   }
  
+ 
   label{
-    margin: 8px 45px;
+    margin: 10px 45px;
     display: block;
-    width: 300px;
-    height: 34px;
-    linhe-height: 34px;
+    width: 330px;
+    height: 40px;
+    linhe-height: 40px;
     border: 1px solid #B8B8B8;
     border-radius: 4px;
+    .form-text{
+      color:red;
+      font-size:14px;
+    }
+    span{
+      width:40px;
+      display:inline-block;
+      font-size:16px;
+      margin-left:10px;
+    }
     button{
-      margin-top: 4px;
+      margin-top: 8px;
       border-left: 1px solid #ccc;
       height: 24px;
       font-size: 14px;
       font-family: SourceHanSansCN;
       font-weight: 400;
       color: #5B5B5B;
-      line-height: 24px;
+      line-height: 18px;
       cursor: pointer;
     }
   }

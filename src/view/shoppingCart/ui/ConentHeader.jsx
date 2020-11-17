@@ -12,9 +12,9 @@ function conentHeader(props) {
   return (
     <HeadStyle>
       <Breadcrumb separator=">">
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Link to='/home/car'>购物车</Link>
-        <Route path='/home/car' component=''></Route>
+        <Breadcrumb.Item><Link to='/home'>首页</Link></Breadcrumb.Item>
+        <Link to='/shoppingcart/car'>{props.data}</Link>
+        <Route path='/shoppingcart/car' component=''></Route>
       </Breadcrumb>
     </HeadStyle>
   );

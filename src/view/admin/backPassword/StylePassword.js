@@ -1,13 +1,18 @@
 import styled from 'styled-components'
 const StylePassword = styled.div`
+  position: absolute;
+  left: 0;
+  top: 30px;
   ul{
-    width: 1200px;
+    width: 1300px;
     height: 240px;
+    margin: 0 auto;
   }
   li{
     margin-left: 100px;
     list-style: none;
     width: 310px;
+    line-height: 46px;
     background: linear-gradient(to right, #1892F7, #7FE4F8);
     border-radius: 12px;
     p{
@@ -23,32 +28,31 @@ const StylePassword = styled.div`
       span{
         position: absolute;
         right: 10px;
-        top: 2px;
+        top: 8px;
       }
     }
   }
 
   li:nth-child(1) {
     position: absolute;
-    left: 0px;
+    left: 300px;
     top: 140px;
   }
   li:nth-child(2) {
     position: absolute;
-    left: 340px;
+    left: 660px;
     top: 140px;
   }
   li:nth-child(3) {
     position: absolute;
-    left: 680px;
+    left: 1020px;
     top: 140px;
   }
   li:nth-child(4) {
     position: absolute;
-    left: 1020px;
+    left: 1080px;
     top: 140px;
   }
-
   
   input,button{  
     background:none;  
@@ -57,15 +61,14 @@ const StylePassword = styled.div`
     line-height: 34px;
     margin-left: 10px;
   }
+
   a{
     text-decoration:none
   }
-  input:focus{   
-    border:1px solid #ccc;
-    font-size: 28px;
-  }
+ 
 
   input{
+    display: block;
     width: 600px;
     height: 60px;
     line-height: 60px;
@@ -76,12 +79,16 @@ const StylePassword = styled.div`
     position: absolute;
     margin-left: 480px;
   }
-  input[name="email"]{
+  input[name="telephone"]{
     top: 300px;
   }
-  input[name="emails"]{
+  input[name="password"]{
+    top: 300px;
+  }
+  input[name="password1"]{
     top: 380px;
   }
+
   input[name="code"]{
     top: 380px;
     width: 200px;
@@ -149,7 +156,7 @@ const StylePassword = styled.div`
   h2{
     position: absolute;
     left: 500px;
-    top: 250px;
+    top: 280px;
     letter-spacing:3px;
     font-size: 40px;
     font-family: SourceHanSansCN;
@@ -174,6 +181,8 @@ const StylePassword = styled.div`
       margin-left: 20px
     }
   }
+
+
 `
 
 

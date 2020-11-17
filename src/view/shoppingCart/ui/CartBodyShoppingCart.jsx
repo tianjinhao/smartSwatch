@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
-import { withRouter } from 'react-router-dom'
-import {ShoppingWarp} from './styledCart'
+import axios from 'axios'
+import {ShoppingWarp, List} from './styledCart'
 
-@withRouter
+
 class CartBodyshoppingCart extends Component {
   state={
     num:1,
-    show:false
+    show:true,
+    data:[]
   }
   handlerChilck = (e) =>{
     if(e.target.value.length>3) return
@@ -33,12 +34,44 @@ class CartBodyshoppingCart extends Component {
   handlerChilck2 = () =>{
     console.log('123123')
   }
+  handleCheck = () =>{
+    this.setState({
+      show:!this.state.show
+    })
+  }
+  handleCheck2 = (i) =>{
+
+  }
+  componentDidMount() {
+    const _this = this
+    axios({
+      method:'POST',
+      url:'http://10.9.27.126:8080/cart/showCart',
+      data:{
+        "userId":"1",
+        "limit":"5",
+        "offset":"1"
+      }
+    }).then(function (response) {
+      response.data.data.forEach(element => {
+        element.checked = false;
+      });
+      console.log(response.data.data);
+      _this.setState({
+        data:response.data.data
+      })
+      console.log(_this.state.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
   render() {
-    console.log(this.props);
     return (
       <ShoppingWarp>
         <div className='tabTitle'>
-          <div className='tabicon'></div>
+          <div className={this.state.show?'tabicon2':'tabicon'} onClick={this.handleCheck}></div>
           <span>全选</span>
           <span style={{marginLeft:'312px'}}>单价（元）</span>
           <span style={{marginLeft:'65px'}}>数量</span>
@@ -46,38 +79,26 @@ class CartBodyshoppingCart extends Component {
           <span style={{marginLeft:'60px'}}>完成</span>
         </div>
         <ul className='tabUl'>
-          <li >
-            <div className='tabicon'></div>
-            <img src="" alt=""/>
-            <div className='description'>
-              <span className='productName'>智能运动手表</span>
-              <span className='producttitle'>蓝牙听歌|索尼28纳米GPS</span>
-            </div>
-            <span className='price'>￥599</span>
-            <div className='productPrice'>
-              <button style={{backgroundPosition:'-78px -82px'}} onClick={this.decreament}></button>
-              <input type="text" value={this.state.num} onChange={this.handlerChilck}/>
-              <button style={{backgroundPosition:'-78px -115px'}}  onClick={this.increament}></button>
-            </div>
-            <div className='total'><div></div><p>599</p></div>
-            <button className='delete' style={{backgroundPosition:'-83px -153px'}} onClick={this.handlerChilck2}></button>
-          </li>
-          <li >
-            <div className='tabicon'></div>
-            <img src="" alt=""/>
-            <div className='description'>
-              <span className='productName'>智能运动手表</span>
-              <span className='producttitle'>蓝牙听歌|索尼28纳米GPS</span>
-            </div>
-            <span className='price'>￥599</span>
-            <div className='productPrice'>
-              <button style={{backgroundPosition:'-78px -82px'}} onClick={this.decreament}></button>
-              <input type="text" value={this.state.num} onChange={this.handlerChilck}/>
-              <button style={{backgroundPosition:'-78px -115px'}}  onClick={this.increament}></button>
-            </div>
-            <div className='total'><div></div><p>599</p></div>
-            <button className='delete' style={{backgroundPosition:'-83px -153px'}}></button>
-          </li>
+          {
+            this.state.data.map((v,i)=>(
+              <List key={v.commodityId}>
+                <div className={v.checked?'tabicon3':'tabicon'} onClick={this.handleCheck2(i)}></div>
+                  <img src={v.imageUrl} alt=""/>
+                  <div className='description'>
+                    <span className='productName'>{v.commodityName}</span>
+                    <span className='producttitle'>{v.describe[0]}|{v.describe[1]}</span>
+                  </div>
+                  <span className='price'>￥{v.commodityPrice}</span>
+                  <div className='productPrice'>
+                    <button style={{backgroundPosition:'-78px -82px',outline:'none',cursor: 'pointer'}} onClick={this.decreament}></button>
+                    <input type="text" value={v.commodityNum} style={{outline:'none'}} onChange={this.handlerChilck}/>
+                    <button style={{backgroundPosition:'-78px -115px',outline:'none',cursor: 'pointer'}}  onClick={this.increament}></button>
+                  </div>
+                  <div className='total'><div></div><p>{v.commodityNum*v.commodityPrice}</p></div>
+                  <button className='delete' style={{backgroundPosition:'-83px -153px'}} onClick={this.handlerChilck2}></button>
+              </List>
+            ))
+          }
         </ul>
         <div className='tabTitle'></div>
         <div className='pagination'></div>

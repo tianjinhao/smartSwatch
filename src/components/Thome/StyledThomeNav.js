@@ -30,6 +30,9 @@ const HomeNavWarp = styled.div `
       display: flex;
       height: 100%;
       line-height: 80px;
+      .nav_item.active li::after{
+        display: block;
+      }
       li {
         width: 118px;
         height: 100%;
@@ -51,7 +54,7 @@ const HomeNavWarp = styled.div `
           display: none;
           transition: all 2s;
         }
-        &:hover::after, &.active::after{
+        &:hover::after{
           display: block;
         }
       }
@@ -81,13 +84,14 @@ const LoginResWrap = styled.ul `
     font-size: 14px;
     color: #fff;
     cursor: pointer;
+    text-align: center;
     &:hover{
       color: #286de9;
     }
   }
 
 
-` 
+`
 
 
 const CateTitleWrap = styled.div `
@@ -137,28 +141,52 @@ const CateWrap = styled.div `
     width: 1300px;
     height: 34px;
     margin:  0 auto;
-    div{
+    display: flex;
+    justify-content: center;
+    ul{
       text-align: center;
       height: 34px;
       line-height: 34px;
-      span{
+      display: inline-block;
+      position: relative;
+      li{
         width: 82px;
         height: 32px;
         display: inline-block;
         cursor: pointer;
         border-radius: 4px;
+        position: relative;
+        transition: all 200ms ease-in;
         &.active{
-          background-image: linear-gradient(to right,#2469e7, #49e5f9);
-          color: #fff;
+          color:#fff;
+          z-index: 3;
         }
-        img{
-          margin-left: 6px;
-          position: relative;
-          top: -1px;
+        &.slide{
+          background-image: linear-gradient(to right,#2469e7, #49e5f9);
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 2;
+        }
+        &.slide.middle{
+          left: 82px;;
+        }
+        &.slide.right{
+          left: 164px;;
         }
       }
-      i{
-        margin: 0 20px;
+    }
+    i{
+      margin: 0 20px;
+      line-height: 34px;
+    }
+    span{
+      line-height: 34px;
+      cursor: pointer;
+      img{
+        margin-left: 6px;
+        position: relative;
+        top: -1px;
       }
     }
   }
@@ -269,15 +297,18 @@ const AccordionWrap = styled.div `
   padding: 50px 40px;
   div{
     width: 560px;
-    max-height: 160px;
+    max-height: 50px;
     text-align: center;
     line-height: 50px;
     margin-bottom: 10px;
-    cursor: pointer;
-    box-shadow: 0px 0px 15px 1px rgba(64, 62, 87, 0.19);
+   
+    overflow: hidden;
+    transition: all 0.3s ease-in;
     h3{
+      box-shadow: 0px 0px 15px 2px rgba(64, 62, 87, 0.5);
       color: #fff;
       background: linear-gradient(-90deg, #49E5F9, #2460E7);
+      cursor: pointer;
     }
     p{
       padding: 36px 20px;
@@ -288,6 +319,9 @@ const AccordionWrap = styled.div `
       font-size: 12px;
       font-weight: 400;
       color: #727272;
+    }
+    &.show{
+      max-height: 160px;
     }
   }
 `
